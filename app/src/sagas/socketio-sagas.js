@@ -21,10 +21,15 @@ import {socketio} from '../services';
 function subscribe(socket) {
   return new eventChannel(emitter => {
     const update = data => {
-      console.log("listened data",data);
-      return  emitter(socketioActions.set_data(data));
+      if(data.length){
+        return  emitter(socketioActions.set_data(data));
+      } else {
+        console.warn("listened data",data);
+      }
+       // console.log("listened data",data);
+
     }
-    console.log("socket listening on get-todos");
+    console.log("socket listening");
     socket.on('message', update)
     return () => {}
   })

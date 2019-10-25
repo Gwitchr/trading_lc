@@ -1,7 +1,9 @@
-import * as cryptoApiCtrl from './cypto-api'
+import * as cryptoApiCtrl from './crypto-api'
+import * as cryptoDataCtrl from './crypto-data'
 import * as socketCtrl from './sockets'
 
 export {
   cryptoApiCtrl,
-  socketCtrl
+  socketCtrl,
+  cryptoDataCtrl
 }

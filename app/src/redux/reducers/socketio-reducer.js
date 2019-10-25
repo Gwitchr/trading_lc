@@ -5,7 +5,8 @@ import {
 
 export const socketioReducer =(state={
   connected:false,
-  data:{Data:[{}]}
+  // data:{Data:[{}]}
+  data:[[null,null,null,null,null,null]]
 },action)=>{
   const {
     type,

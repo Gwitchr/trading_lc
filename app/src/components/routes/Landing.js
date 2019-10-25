@@ -8,7 +8,7 @@ const Landing =()=>{
       <Jumbotron>
         <h1 className="display-3">SocketIO c/5 seg</h1>
         <p className="lead">
-          OHLCV Bitcoin to USD
+          OHLCV Bitcoin to USDT
         </p>
         <hr className="my-2" />
 

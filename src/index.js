@@ -9,9 +9,9 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-// import { mongooseConnection } from './config/connection';
+import { mongooseConnection } from './config/connection';
 import routes from './routes/';
-import crons from './crons/';
+import * as crons from './crons/';
 dotenv.config();
 
 const app = express();
@@ -25,15 +25,15 @@ const csrfProtection = csurf({cookie: true});
  */
 let whiteList = []
 
-// if(process.env.NODE_ENV==='development'){
-//   whiteList = ['http://quoter.workosfera.com', 'http://localhost:3000',undefined]
-//   // whiteList = ['http://quoter.workosfera.com']
-//   mongooseConnection(process.env.MONGODB_DEV);
-//   app.use(logger('dev'));
-// } else {
-//   whiteList = ['http://quoter.workosfera.com','http://workosfera.com','http://www.quoter.workosfera.com']
-//   mongooseConnection(process.env.MONGODB_URI);
-// }
+if(process.env.NODE_ENV==='development'){
+  // whiteList = ['http://quoter.workosfera.com', 'http://localhost:3000',undefined]
+  // whiteList = ['http://quoter.workosfera.com']
+  mongooseConnection(process.env.MONGODB_DEV);
+  app.use(logger('dev'));
+} else {
+  // whiteList = ['http://quoter.workosfera.com','http://workosfera.com','http://www.quoter.workosfera.com']
+  mongooseConnection(process.env.MONGODB_URI);
+}
 
 
 const corsOptions = {
@@ -65,6 +65,8 @@ app.use(bodyParser.json());
 
 app.use('/api', routes);
 
+crons.getMain()
+
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 // if (process.env.NODE_ENV === 'production') {
@@ -89,7 +91,7 @@ app.use(function(err, req, res, next) {
     res.locals.error = err;
 
     // render the error page
-    console.log(err)
+    console.warn(err)
     res.status(err.status || 500).json({error:err})
 
     // res.render('error');

@@ -7,8 +7,9 @@ export const setHJson=(i,method,b)=>{
     mode:'cors',
     headers:{
       "Content-Type":"application/json",
-      // "token":USERKEY
-      "Authorization":`Apikey ${process.env.CRYPTOCOMPARE_KEY}.`
+      "X-MBX-APIKEY":process.env.BIN_KEY,
+      // "secretKey":process.env.BIN_SC_KEY
+      // "Authorization":`Apikey ${process.env.CRYPTOCOMPARE_KEY}.`
 
     }
   }
